@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import  'signalr'
 
 import { ChannelService, ChannelEvent } from './../../../services/channel.service';
 
