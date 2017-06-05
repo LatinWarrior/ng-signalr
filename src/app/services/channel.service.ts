@@ -6,6 +6,16 @@ export class SignalrWindow extends Window {
     $: any;
 }
 
+@Injectable()
+export class ChannelConfigFactory {
+    channelConfig: ChannelConfig;
+    constructor() {
+        let channelConfig = new ChannelConfig();
+        channelConfig.url = "http://localhost:9123/signalr";
+        channelConfig.hubName = "EventHub";
+    }
+}
+
 export enum ConnectionState {
     Connecting = 1,
     Connected = 2,

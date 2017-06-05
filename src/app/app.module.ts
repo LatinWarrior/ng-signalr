@@ -10,11 +10,14 @@ import "rxjs/add/operator/map";
 import { AppComponent } from './app.component';
 import { TaskStreamComponent } from './features/tasks/task-stream/task-stream.component';
 
-import { ChannelService, ChannelConfig, SignalrWindow } from './services/channel.service';
+import { ChannelService, ChannelConfig, SignalrWindow, ChannelConfigFactory } from './services/channel.service';
 
-let channelConfig = new ChannelConfig();
-channelConfig.url = "http://localhost:9123/signalr";
-channelConfig.hubName = "EventHub";
+function getChannelConfig() {
+  let channelConfig = new ChannelConfig();
+  channelConfig.url = "http://localhost:9123/signalr";
+  channelConfig.hubName = "EventHub";
+  return channelConfig;
+};
 
 @NgModule({
   declarations: [
@@ -27,9 +30,11 @@ channelConfig.hubName = "EventHub";
     HttpModule
   ],
   providers: [
-    ChannelService,
+    ChannelService,    
+    ChannelConfigFactory,
     { provide: SignalrWindow, useValue: window },
-    { provide: 'channel.config', useValue: channelConfig }
+    { provide: 'channel.config', useValue: getChannelConfig() }
+    //{ provide: 'channel.config', useValue: channelConfig }
   ],
   bootstrap: [AppComponent]
 })
